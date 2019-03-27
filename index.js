@@ -2,7 +2,26 @@
 const express = require('express'); // REQUIRE EXPRESS
 const server = express(); // CREATE SERVER
 const helmet = require('helmet'); // REQUIRE HELMET
+const knex = require('knex') // REQUIRE KNEX 
 
+const knexConfig = {
+    client: 'sqlite3',
+    connection: {
+        filename: './data/projectx.db3',
+    },
+    useNullAsDefault: true, // needed for sqlite
+    };
+    
+    // DEFINE DATABASE
+    const dbConfig = require("./knexfile.js")
+    
+    const db = knex(dbConfig.development);
+
+// const knexConfig = require('./knexfile.js') // REQUIRE KNEXCONFIG
+
+
+// const projectRouter = require('./Routes/projectRoutes');
+// const actionRouter = require('./Routes/actionRoutes');
 
 
 // TEST ROUTE HANDLER FUNCTION
