@@ -4,6 +4,7 @@ const server = express(); // CREATE SERVER
 const helmet = require('helmet'); // REQUIRE HELMET
 const knex = require('knex') // REQUIRE KNEX 
 
+// DEFINE KNEX CONFIGURATION
 const knexConfig = {
     client: 'sqlite3',
     connection: {
@@ -12,9 +13,9 @@ const knexConfig = {
     useNullAsDefault: true, // needed for sqlite
     };
     
-// DEFINE DATABASE
+// DEFINE DATABASE CONFIGURATION
 const dbConfig = require("./knexfile")
-
+// DEFINE DATABASE
 const db = knex(dbConfig.development);
 
 
@@ -97,7 +98,7 @@ server.get('/api/actions', (req, res, next) => {
     res.status(500).json(err);
 });
 
-// Create new action
+// LOGIC FOR CREATING A NEW ACTOIN
 server.post('/api/actions', (req, res, next) => {
     const { description, notes, completed, project_id } = req.body;
     db
@@ -109,6 +110,7 @@ server.post('/api/actions', (req, res, next) => {
     res.status(500).json(err);
 });
 
+// RUN SERVER
 server.listen(port, () => 
     console.log(`\n Server running on PORT ${port} \n`)
 );
